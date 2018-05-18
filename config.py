@@ -4,6 +4,7 @@ class Config:
     '''
     Describes the general configurations
     '''
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://richi:pass@localhost/pitchit'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
