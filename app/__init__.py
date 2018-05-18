@@ -30,7 +30,7 @@ def create_app(config_name):
     db.init_app(app)
     mail.init_app(app)
     login_manager.init_app(app)
-    simple.init_app(app)
+    # simple.init_app(app)
 
     # Registering the main app Blueprint
     from .main import main as main_blueprint
@@ -40,6 +40,6 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint,url_prefix = '/auth')
 
-    configure_uploads(app,photos)
+    # configure_uploads(app,photos)
 
     return app
