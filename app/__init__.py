@@ -15,7 +15,7 @@ bootstrap = Bootstrap()
 db = SQLAlchemy()
 mail = Mail()
 photos = UploadSet('photos',IMAGES)
-simple = SimpleMDE
+simple = SimpleMDE()
 
 def create_app(config_name):
 
@@ -30,7 +30,7 @@ def create_app(config_name):
     db.init_app(app)
     mail.init_app(app)
     login_manager.init_app(app)
-    # simple.init_app(app)
+    simple.init_app(app)
 
     # Registering the main app Blueprint
     from .main import main as main_blueprint
