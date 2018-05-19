@@ -53,6 +53,15 @@ def home():
     title = 'Home | One Minute Pitch'    
     return render_template('home.html', title = title, category_form = category_form, pitch_form = pitch_form, pitches = all_pitches)
 
+@main.route('/pitch/<int:id>')
+@login_required
+def pitch(id):
+    
+    my_pitch = Pitch.query.get(id)
+    # final_pitch = my_pitch.pitch_content
+
+    return render_template('pitch.html',pitch = my_pitch)
+    
 # @main.route('/home/pitch/new', methods = ['GET', 'POST'])
 # @login_required
 # def new_pitch():

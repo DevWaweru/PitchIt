@@ -4,7 +4,8 @@
         <p>{{pitch.pitch_content}}</p>
         <hr>
         <p> {{pitch.user.username}} </p>
-        <p class="small"> Category {{pitch.pitch_category}} </p>
+        <p class="small"> Category: {{pitch.pitch_category}} </p>
+        <p><a href="/pitch/{{pitch.id}}">Add Comment</a></p>
     </div>
     {% endfor %}
 {% endmacro %}
