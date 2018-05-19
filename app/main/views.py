@@ -3,6 +3,7 @@ from . import main
 from ..models import User, Category, Pitch
 from flask_login import login_required, current_user
 from .. import db
+from .forms import PitchForm, CategoryForm
 
 @main.route('/')
 def index():
@@ -24,10 +25,48 @@ def profile(uname):
     
     return render_template('profile/profile.html', user = user, title=title)
 
-@main.route('/home')
+@main.route('/home', methods = ['GET', 'POST'])
 @login_required
 def home():
+    category_form = CategoryForm()
+    pitch_form = PitchForm()
 
-    title = 'Home | One Minute Pitch'
+    if category_form.validate_on_submit():
+        category = category_form.category.data
+        new_category = Category(categ = category)
+        new_category.save_category()
+
+        return redirect(url_for('main.home'))
     
-    return render_template('home.html', title = title)
+    if pitch_form.validate_on_submit():
+        pitch = pitch_form.pitch.data
+        cat = pitch_form.my_category.data
+        print(cat)
+
+        new_pitch = Pitch(pitch_content=pitch, pitch_category = cat, user = current_user)
+        new_pitch.save_pitch()
+
+        return redirect(url_for('main.home'))
+
+    all_pitches = Pitch.get_all_pitches()
+
+    title = 'Home | One Minute Pitch'    
+    return render_template('home.html', title = title, category_form = category_form, pitch_form = pitch_form, pitches = all_pitches)
+
+# @main.route('/home/pitch/new', methods = ['GET', 'POST'])
+# @login_required
+# def new_pitch():
+#     category_form = CategoryForm()
+#     pitch_form = PitchForm()
+
+#     if category_form.validate_on_submit() and pitch_form.validate_on_submit():
+#         category = category_form.category.data
+#         new_category = Category(categ = category)
+#         new_category.save_category()
+
+#         pitch = pitch_form.pitch.data
+#         new_pitch = Pitch(pitch_content=pitch)
+#         new_pitch.save_pitch()
+
+#         return redirect(url_for('main.home'))
+

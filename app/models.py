@@ -52,6 +52,7 @@ class Pitch(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     pitch_content = db.Column(db.String())
+    pitch_category = db.Column(db.String(255))
     category_id = db.Column(db.Integer,db.ForeignKey('categories.id'))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
@@ -62,4 +63,9 @@ class Pitch(db.Model):
     @classmethod
     def get_pitch(cls,id):
         pitches = Pitch.query.filter_by(id=id).all()
+        return pitches
+
+    @classmethod
+    def get_all_pitches(cls):
+        pitches = Pitch.query.filter_by().all()
         return pitches

@@ -1,0 +1,10 @@
+{% macro displayPitches(my_pitches) %}
+    {% for pitch in my_pitches %}
+    <div class="col-md-12 pitches">
+        <p>{{pitch.pitch_content}}</p>
+        <hr>
+        <p> {{pitch.user.username}} </p>
+        <p class="small"> Category {{pitch.pitch_category}} </p>
+    </div>
+    {% endfor %}
+{% endmacro %}
