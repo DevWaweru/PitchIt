@@ -18,6 +18,7 @@ class User(UserMixin,db.Model):
 
     pitches = db.relationship('Pitch',backref='user',lazy='dynamic')
     comments = db.relationship('Comment',backref='user',lazy='dynamic')
+    upvotes = db.relationship('UpVote',backref='user',lazy='dynamic')
 
     @property
     def password(self):
@@ -70,6 +71,9 @@ class Pitch(db.Model):
     def get_all_pitches(cls):
         pitches = Pitch.query.order_by('-id').all()
         return pitches
+    
+    def __repr__(self):
+        return f'Pitch {self.pitch_content}'
 
 class Comment(db.Model):
     __tablename__='comments'
@@ -87,3 +91,22 @@ class Comment(db.Model):
     def get_comments(cls,id):
         comments = Comment.query.filter_by(pitch_id=id).order_by('-id').all()
         return comments
+    
+    def __repr__(self):
+        return f'Comment {self.comment_content}'
+    
+class UpVote(db.Model):
+    __tablename__ = 'upvotes'
+
+    id = db.Column(db.Integer,primary_key=True)
+    id_user = db.Column(db.Integer,db.ForeignKey('users.id'),unique = True)
+    pitching_id = db.Column(db.Integer)
+
+    def save_vote(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    @classmethod
+    def get_votes(cls,id):
+        upvote = UpVote.query.filter_by(pitching_id=id).all()
+        return upvote

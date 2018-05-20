@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from . import main
-from ..models import User, Category, Pitch, Comment
+from ..models import User, Category, Pitch, Comment, UpVote
 from flask_login import login_required, current_user
 from .. import db
 from .forms import PitchForm, CategoryForm, CommentForm
@@ -24,6 +24,15 @@ def profile(uname):
         abort(404)
     
     return render_template('profile/profile.html', user = user, title=title)
+
+@main.route('/home/like/<int:id>', methods = ['GET','POST'])
+@login_required
+def like(id):
+
+    like_pitch = UpVote(user = current_user, pitching_id=id)
+    like_pitch.save_vote()
+
+    return redirect(url_for('main.home'))
 
 @main.route('/home', methods = ['GET', 'POST'])
 @login_required
@@ -69,7 +78,10 @@ def pitch(id):
         return redirect(url_for('main.pitch',id=id))
 
     all_comments = Comment.get_comments(id)
-    return render_template('pitch.html',pitch = my_pitch, comment_form = comment_form, comments = all_comments)
+    all_likes = UpVote.get_votes(id)
+
+    title = 'Comment | One Minute Pitch'
+    return render_template('pitch.html',pitch = my_pitch, comment_form = comment_form, comments = all_comments, title = title, likes = all_likes)
     
 # @main.route('/home/pitch/new', methods = ['GET', 'POST'])
 # @login_required
