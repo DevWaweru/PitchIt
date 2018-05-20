@@ -17,6 +17,7 @@ class User(UserMixin,db.Model):
     bio = db.Column(db.String(255))
 
     pitches = db.relationship('Pitch',backref='user',lazy='dynamic')
+    comments = db.relationship('Comment',backref='user',lazy='dynamic')
 
     @property
     def password(self):
@@ -67,5 +68,22 @@ class Pitch(db.Model):
 
     @classmethod
     def get_all_pitches(cls):
-        pitches = Pitch.query.filter_by().all()
+        pitches = Pitch.query.order_by('-id').all()
         return pitches
+
+class Comment(db.Model):
+    __tablename__='comments'
+
+    id = db.Column(db.Integer,primary_key=True)
+    comment_content = db.Column(db.String())
+    pitch_id = db.Column(db.Integer)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_comments(cls,id):
+        comments = Comment.query.filter_by(pitch_id=id).order_by('-id').all()
+        return comments

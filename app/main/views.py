@@ -1,9 +1,9 @@
 from flask import render_template, request, redirect, url_for
 from . import main
-from ..models import User, Category, Pitch
+from ..models import User, Category, Pitch, Comment
 from flask_login import login_required, current_user
 from .. import db
-from .forms import PitchForm, CategoryForm
+from .forms import PitchForm, CategoryForm, CommentForm
 
 @main.route('/')
 def index():
@@ -53,14 +53,23 @@ def home():
     title = 'Home | One Minute Pitch'    
     return render_template('home.html', title = title, category_form = category_form, pitch_form = pitch_form, pitches = all_pitches)
 
-@main.route('/pitch/<int:id>')
+@main.route('/pitch/<int:id>',methods = ['GET','POST'])
 @login_required
 def pitch(id):
     
     my_pitch = Pitch.query.get(id)
-    # final_pitch = my_pitch.pitch_content
+    comment_form = CommentForm()
 
-    return render_template('pitch.html',pitch = my_pitch)
+    if comment_form.validate_on_submit():
+        comment_data = comment_form.comment.data
+
+        new_comment = Comment(comment_content = comment_data, pitch_id = id, user = current_user)
+        new_comment.save_comment()
+
+        return redirect(url_for('main.pitch',id=id))
+
+    all_comments = Comment.get_comments(id)
+    return render_template('pitch.html',pitch = my_pitch, comment_form = comment_form, comments = all_comments)
     
 # @main.route('/home/pitch/new', methods = ['GET', 'POST'])
 # @login_required

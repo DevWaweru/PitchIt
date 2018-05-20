@@ -1,0 +1,17 @@
+.pitches{
+    box-shadow: 2px 4px 12px 2px #dcdcdc;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-left: 2rem;
+}
+.comments{
+    box-shadow: 2px 4px 12px 2px #dcdcdc;
+    border-radius: 5px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+}
