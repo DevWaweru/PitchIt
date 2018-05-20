@@ -17,10 +17,16 @@
                     Categories
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="/category/Interview-Pitch">Interview Pitch</a>
+                    <a class="dropdown-item" href="/category/Product-Pitch">Product Pitch</a>
+                    <a class="dropdown-item" href="/category/Promotion-Pitch">Promotion Pitch</a>
+                    <a class="dropdown-item" href="/category/Business">Business</a>
+                    <a class="dropdown-item" href="/category/Academic">Academic</a>
+                    <a class="dropdown-item" href="/category/Political">Political</a>
+                    <a class="dropdown-item" href="/category/Technology">Technology</a>
+                    <a class="dropdown-item" href="/category/Health">Health</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="{{url_for('main.profile', uname = current_user.username)}}">{{current_user.username|capitalize}}</a>
                 </div>
             </li>
         </ul>
