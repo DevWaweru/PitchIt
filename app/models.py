@@ -78,11 +78,8 @@ class Comment(db.Model):
 
     @classmethod
     def get_comments(cls,id):
-        comments = Comment.query.filter_by(pitch_id=id).order_by('-id').all()
+        comments = Comment.query.filter_by(pitch_id=id).all()
         return comments
-    
-    def __repr__(self):
-        return f'Comment {self.comment_content}'
     
 class UpVote(db.Model):
     __tablename__ = 'upvotes'
