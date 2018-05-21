@@ -1,12 +1,20 @@
-.pitches{
+.pitches {
     box-shadow: 2px 4px 12px 2px #dcdcdc;
     border-radius: 5px;
     margin-top: 1rem;
     margin-bottom: 1rem;
     padding-top: 1rem;
     padding-left: 2rem;
+    font-family: 'Mukta';
 }
-.comments{
+
+.pitches img,
+.comment img,
+.comments img {
+    max-width: 40px;
+}
+
+.comments {
     box-shadow: 2px 4px 12px 2px #dcdcdc;
     border-radius: 5px;
     margin-top: 1rem;
@@ -14,37 +22,72 @@
     padding-top: 1rem;
     padding-left: 2rem;
     padding-bottom: 1rem;
+    font-family: 'Mukta';
 }
-.welcome-page{
+
+.welcome-page {
     padding: 0;
     margin: 0;
     background-image: linear-gradient(rgba(0, 0, 0, 0.61), rgba(0, 0, 0, 0.61)), url('/static/bg.jpg');
     background-size: cover;
-} 
-.welcome{
+}
+
+.welcome {
     text-align: center;
     padding-top: 15rem;
     padding-bottom: 22rem;
 }
-.welcome h1{
+
+.welcome h1 {
     font-family: 'Bilbo Swash Caps';
     font-size: 150px;
     color: white;
 }
-.welcome h2{
+
+.welcome h2 {
     font-family: 'Cinzel';
     font-size: 30px;
     color: white;
 }
-.welcome a{
+
+.welcome a {
     font-family: 'Mukta';
     width: 140px;
 }
-.welcome a:hover{
+
+.welcome a:hover {
     color: white;
 }
-.about{
+
+.about {
     margin-top: 2rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+}
+
+.user-tag {
+    font-family: 'Mukta';
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+h3 {
+    font-family: 'Shadows Into Light Two'
+}
+
+.stats {
+    padding-left: 3rem;
+}
+
+.stats p {
+    font-family: 'Mukta';
+}
+
+a:hover {
+    text-decoration: None;
+}
+
+.picture img {
+    border-radius: 50px;
 }
