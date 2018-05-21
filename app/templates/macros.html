@@ -1,7 +1,7 @@
 {% macro displayPitches(my_pitches) %}
     {% for pitch in my_pitches %}
     <div class="col-md-12 pitches">
-        <p> <a href="/user/{{pitch.user.username}}">{{pitch.user.username|capitalize}}</a></p>
+        <p> <a href="/user/{{pitch.user.username}}&{{pitch.user.id}}">{{pitch.user.username|capitalize}}</a></p>
         <p>{{pitch.pitch_content}}</p>
         <p class="small"> Category: {{pitch.pitch_category}} </p>
         <hr>
