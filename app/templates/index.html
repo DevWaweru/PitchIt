@@ -1,18 +1,18 @@
-{% extends 'base.html'%}
-
+{% extends 'base.html'%} 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Hello world</h1>
+<div class="container-fluid welcome-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 welcome">
+                <h1>Welcome</h1>
+                <h2>One Minute Pitch</h2>
+                {% if current_user.is_authenticated%}
+                <a id="start" class="btn btn-danger animated infinite flash" href="{{url_for('main.home')}}">View Pitches</a>
+                {% else %}
+                <a id="start" class="btn btn-danger animated infinite flash" href="{{url_for('auth.login')}}">Sign In</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
 {% endblock %}
-
-
-<!-- <li class="nav-item active">
-        <a class="nav-link" href="#">Home
-            <span class="sr-only">(current)</span>
-        </a>
-    </li> -->

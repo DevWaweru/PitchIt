@@ -7,10 +7,11 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 comments">
-            <h4> <a href="/user/{{pitch.user.username}}">{{pitch.user.username}}</a> </h4>
+            <h4> <a href="/user/{{pitch.user.username}}">{{pitch.user.username|capitalize}}</a> </h4>
             <p class="pitch-content">{{pitch.pitch_content}}</p>
             <hr>
             {{wtf.quick_form(comment_form)}}
+            {{simplemde.load}}
             <ul class="list-inline">
                 <li class="list-inline-item"><a class="btn btn-primary" href="{{url_for('main.like',id=pitch.id)}}"><i class="fa fa-thumbs-up fa-2x"></i></a></li>
                 <li class="list-inline-item">{{likes|length}}</li>

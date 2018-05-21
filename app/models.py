@@ -62,8 +62,6 @@ class Pitch(db.Model):
         category = Pitch.query.filter_by(pitch_category=cat).order_by('-id').all()
         return category
     
-    def __repr__(self):
-        return f'Pitch {self.pitch_content}'
 
 class Comment(db.Model):
     __tablename__='comments'

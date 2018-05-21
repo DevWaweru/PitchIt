@@ -4,7 +4,6 @@ from ..models import User, Pitch, Comment, UpVote, DownVote
 from flask_login import login_required, current_user
 from .. import db
 from .forms import PitchForm, CategoryForm, CommentForm
-from time import sleep
 
 @main.route('/')
 def index():
@@ -20,7 +19,7 @@ def index():
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 
-    title = f"{uname}'s Profile"
+    title = f"{uname.capitalize()}'s Profile"
     if user is None:
         abort(404)
     
@@ -72,6 +71,7 @@ def home():
     if pitch_form.validate_on_submit():
         pitch = pitch_form.pitch.data
         cat = pitch_form.my_category.data
+
         new_pitch = Pitch(pitch_content=pitch, pitch_category = cat, user = current_user)
         new_pitch.save_pitch()
 
