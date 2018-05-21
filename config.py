@@ -7,7 +7,7 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     DATABASE_PASS = os.environ.get('DATABASE_PASS')
     UPLOADED_PHOTOS_DEST = 'app/static/photos'
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://richi:'+DATABASE_PASS+'@localhost/pitchit'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     #Simple MDE configurations
@@ -25,8 +25,7 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with general configuration settings
     '''
-    DATABASE_PASS = os.environ.get('DATABASE_PASS')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://richi:'+DATABASE_PASS+'@localhost/pitchit'
+    SQLALCHEMY_DATABASE_URI = os.environ.get['SQLALCHEMY_DATABASE_URI']
 
 class DevConfig(Config):
     '''
@@ -35,8 +34,7 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with general configuration settings
     '''
-    DATABASE_PASS = os.environ.get('DATABASE_PASS')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://richi:'+DATABASE_PASS+'@localhost/pitchit'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     DEBUG = True
 
 class TestConfig(Config):
