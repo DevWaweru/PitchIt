@@ -24,7 +24,7 @@
 .welcome{
     text-align: center;
     padding-top: 15rem;
-    padding-bottom: 20rem;
+    padding-bottom: 22rem;
 }
 .welcome h1{
     font-family: 'Bilbo Swash Caps';
@@ -42,4 +42,8 @@
 }
 .welcome a:hover{
     color: white;
+}
+.about{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }

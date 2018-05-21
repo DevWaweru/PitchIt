@@ -2,8 +2,8 @@ from flask import render_template, request, redirect, url_for, flash
 from . import main
 from ..models import User, Pitch, Comment, UpVote, DownVote
 from flask_login import login_required, current_user
-from .. import db
-from .forms import PitchForm, CategoryForm, CommentForm
+from .. import db, photos
+from .forms import PitchForm, CommentForm, UpdateProfile
 
 @main.route('/')
 def index():
@@ -110,3 +110,34 @@ def category(cat):
     title = f'{cat} category | One Minute Pitch'
 
     return render_template('category.html', title=title, category=my_category)
+
+@main.route('/user/<uname>/update', methods=['GET','POST'])
+@login_required
+def update_profile(uname):
+    user = User.query.filter_by(username = uname).first()
+
+    if user is None:
+        abort(404)
+    
+    update_form = UpdateProfile()
+
+    if update_form.validate_on_submit():
+        user.bio = update_form.bio.data
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('.profile',uname = user.username))
+    
+    return render_template('profile/update.html', form=update_form)
+
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username = uname).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        # user_photo = PhotoProfile(pic_path = path,user = user)
+        db.session.commit()
+    return redirect(url_for('main.profile',uname=uname))
