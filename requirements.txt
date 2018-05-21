@@ -19,7 +19,7 @@ decorator==4.1.2
 dnspython==1.15.0
 dominate==2.3.1
 ecdsa==0.13
-Electrum==3.0.5
+# Electrum==3.0.5
 Flask==1.0.2
 # Flask-Bootstrap==3.3.7.1
 Flask-Bootstrap4==4.0.2
