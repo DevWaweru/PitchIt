@@ -4,6 +4,7 @@ from ..models import User, Pitch, Comment, UpVote, DownVote
 from flask_login import login_required, current_user
 from .. import db, photos
 from .forms import PitchForm, CommentForm, UpdateProfile
+import markdown2
 
 @main.route('/')
 def index():
@@ -103,6 +104,9 @@ def pitch(id):
         return redirect(url_for('main.pitch',id=id))
 
     all_comments = Comment.get_comments(id)
+    # print(all_comments)
+    # format_comments = markdown2.markdown(all_comments.comment_content,extras=["code-friendly", "fenced-code-blocks"])
+
     up_likes = UpVote.get_votes(id)
     down_likes = DownVote.get_downvotes(id)
 
