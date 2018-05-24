@@ -1,10 +1,10 @@
 from flask import render_template, redirect, url_for, flash, request
 from ..models import User
-from ..email import send_email
+from ..email import send_email, send_reset_email
 from . import auth
 from flask_login import login_user, login_required, logout_user, current_user
 from .. import db
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, ResetPassword, NewPassword
 import os
 
 @auth.route('/login',methods = ['GET','POST'])
@@ -47,3 +47,31 @@ def logout():
     logout_user()
     # flash("You have been successfully logged out")
     return redirect(url_for('main.index'))
+
+@auth.route('/reset',methods=['GET','POST'])
+def reset_password():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    form = ResetPassword()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_reset_email(user)
+            flash('Check email on how to reset password')
+            return redirect(url_for('auth.login'))
+    return render_template('auth/reset.html',title='Reset Password',form=form)
+
+@auth.route('/new_password/<token>', methods=['GET','POST'])
+def new_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+    user = User.verify_reset_password(token)
+    if not user:
+        return redirect(url_for('main.index'))
+    form = NewPassword()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('Your password has been reset')
+        return redirect(url_for('auth.login'))
+    return render_template('auth/change_password.html',title='Reset Password',form=form)

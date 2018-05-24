@@ -24,7 +24,7 @@
                 {{ wtf.quick_form(login_form) }}
                 <br>
                 <p>New User?<a href="{{url_for('auth.register')}}"> Sign up here</a></p>
-                <br>
+                <p>Forgot Password? <a href="{{url_for('auth.reset_password')}}">Reset Password</a></p>
             </div>
         </div>
     </div>
