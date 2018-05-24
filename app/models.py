@@ -115,7 +115,7 @@ class DownVote(db.Model):
     def get_downvotes(cls,id):
         downvote = DownVote.query.filter_by(pitching_id=id).all()
         return downvote
-    
+        
     def __repr__(self):
         return f'{self.id_user}:{self.pitching_id}'
     

@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, abort
 from . import main
 from ..models import User, Pitch, Comment, UpVote, DownVote
 from flask_login import login_required, current_user
@@ -95,6 +95,9 @@ def pitch(id):
     
     my_pitch = Pitch.query.get(id)
     comment_form = CommentForm()
+
+    if id is None:
+        abort(404)
 
     if comment_form.validate_on_submit():
         comment_data = comment_form.comment.data
