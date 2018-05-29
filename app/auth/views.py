@@ -28,7 +28,7 @@ def register():
         return redirect(url_for('main.index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(email = form.email.data, username = form.username.data,password = form.password.data)
+        user = User(email = form.email.data, username = form.username.data, password = form.password.data)
         db.session.add(user)
         db.session.commit()
 
@@ -59,6 +59,8 @@ def reset_password():
             send_reset_email(user)
             flash('Check email on how to reset password')
             return redirect(url_for('auth.login'))
+        elif not user:
+            flash('The email does not exist')
     return render_template('auth/reset.html',title='Reset Password',form=form)
 
 @auth.route('/new_password/<token>', methods=['GET','POST'])
