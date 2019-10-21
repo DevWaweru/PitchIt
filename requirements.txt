@@ -19,7 +19,7 @@ cycler==0.10.0
 decorator==4.1.2
 dnspython==1.15.0
 dominate==2.3.1
-ecdsa==0.13
+ecdsa==0.13.3
 # Electrum==3.0.5
 extras==1.0.0
 fixtures==3.0.0
