@@ -3,7 +3,7 @@ AdvancedHTTPServer==2.0.10
 # apparmor==2.12
 # asn1crypto==0.24.0
 # astroid==1.6.4
-Babel==2.5.3
+Babel==2.9.1
 # beautifulsoup4==4.6.0
 # binwalk==2.1.1
 # blinker==1.4
